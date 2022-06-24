@@ -7,7 +7,7 @@ trigger:
 - main
 
 pool:
-  vmImage: 'redhat-latest'
+  vmImage: 'ubuntu'
 
 steps:
 - script: hello world!
@@ -17,3 +17,12 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(e5be5fe0-bc0e-4f3d-b1cd-f0366614b608)'
+    appType: 'webApp'
+    WebAppName: 
+    deployToSlotOrASE: true
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
